@@ -2,14 +2,15 @@ const gameBoard = (function() {
     'use strict';
 
     let boardMatrix = 
-    [ ['', '', ''],
+    [ 
+    ['', '', ''],
     ['', '', ''], 
-    ['', '', '']];
+    ['', '', '']
+    ];
 
     return {boardMatrix:boardMatrix};
     
 })();
-gameBoard();
 
 
 const playerFactory = function(playerType) {
