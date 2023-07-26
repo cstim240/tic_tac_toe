@@ -9,3 +9,21 @@ let gameBoard = (function() {
     return boardMatrix;
 })();
 gameBoard();
+
+
+const playerFactory = function(playerType) {
+    let playerSymbol = '';
+    
+    let assignSymbol = (playerType) => {
+        if (playerType == 'user'){
+            playerSymbol = 'X';
+        } else {
+            playerSymbol = 'O';
+        } 
+    }
+
+    return assignSymbol;
+}
+
+const user = playerFactory('user');
+console.log(user.assignSymbol);
