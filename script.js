@@ -5,7 +5,6 @@ let gameBoard = (function() {
     [ ['', '', ''],
     ['', '', ''], 
     ['', '', '']];
-    
 
-
+    return boardMatrix;
 })();
