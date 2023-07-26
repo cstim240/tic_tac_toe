@@ -1,4 +1,4 @@
-let gameBoard = (function() {
+const gameBoard = (function() {
     'use strict';
 
     let boardMatrix = 
@@ -6,7 +6,8 @@ let gameBoard = (function() {
     ['', '', ''], 
     ['', '', '']];
 
-    return boardMatrix;
+    return {boardMatrix:boardMatrix};
+    
 })();
 gameBoard();
 
