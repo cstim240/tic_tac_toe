@@ -8,8 +8,11 @@ const gameBoard = (function() {
     ['', '', '']
     ];
 
-    return {boardMatrix:boardMatrix};
-    
+    let isGameOver = false;
+
+    return {boardMatrix:boardMatrix,
+        isGameOver
+    };
 })();
 
 
