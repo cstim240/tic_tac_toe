@@ -8,3 +8,4 @@ let gameBoard = (function() {
 
     return boardMatrix;
 })();
+gameBoard();
