@@ -15,7 +15,7 @@ gameBoard();
 const playerFactory = function(playerType) {
     let playerSymbol = '';
     
-    let assignSymbol = (playerType) => {
+    let declareSymbol = (playerType) => {
         if (playerType == 'user'){
             playerSymbol = 'X';
         } else {
@@ -23,8 +23,8 @@ const playerFactory = function(playerType) {
         } 
     }
 
-    return assignSymbol;
+    return declareSymbol;
 }
 
 const user = playerFactory('user');
-console.log(user.assignSymbol);
+console.log(user.declareSymbol);
