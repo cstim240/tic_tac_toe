@@ -10,10 +10,35 @@ const gameBoard = (function() {
 
     let isGameOver = false;
 
-    return {boardMatrix:boardMatrix,
+    function getBoardMatrix(){
+        return boardMatrix;
+    }
+
+    return {getBoardMatrix,
         isGameOver
     };
 })();
+
+function displayGameBoard(){
+    const gameBoardElement = document.getElementById("game_board");
+    const boardMatrix = gameBoard.getBoardMatrix();
+
+    gameBoardElement.innerHTML = ''; //clear the table element from previous content
+
+    for (let i = 0; i < boardMatrix.length; ++i){
+        const row = document.createElement('tr'); //creates a row for each of the array(/3) inside boardMatrix
+
+        for (let j = 0; j < boardMatrix[i].length; ++j){
+            const cell = document.createElement('td'); //creates a cell/column for each array row inside boardMatrix
+            cell.textContent = boardMatrix[i][j]; // set value from boardMatrix
+            row.appendChild(cell);
+        }
+
+        gameBoardElement.appendChild(row);
+    }
+}
+
+displayGameBoard();
 
 
 const playerFactory = function(playerType) {
