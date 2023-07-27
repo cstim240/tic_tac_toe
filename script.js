@@ -1,4 +1,4 @@
-const gameBoard = (function() {
+const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of game 
     'use strict';
 
     let boardMatrix = 
@@ -21,7 +21,7 @@ const gameBoard = (function() {
 
 function displayGameBoard(){
     const gameBoardElement = document.getElementById("game_board");
-    const boardMatrix = gameBoard.getBoardMatrix();
+    const boardMatrix = gameBoard.getBoardMatrix(); //gets the boardMatrix from the gameBoard object
 
     gameBoardElement.innerHTML = ''; //clear the table element from previous content
 
