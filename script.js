@@ -14,8 +14,12 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
         return boardMatrix;
     }
 
+    function setCellValue(row, col, value){
+        return boardMatrix[row][col] = value;
+    }
+
     return {getBoardMatrix,
-        isGameOver
+        isGameOver, setCellValue
     };
 })();
 
@@ -31,6 +35,9 @@ function displayGameBoard(){
         for (let j = 0; j < boardMatrix[i].length; ++j){
             const cell = document.createElement('td'); //creates a cell/column for each array row inside boardMatrix
             cell.textContent = boardMatrix[i][j]; // set value from boardMatrix
+            cell.setAttribute("row", i); //gives the cell an attribute of row=i
+            cell.setAttribute("column", j); 
+            cell.addEventListener('click', handleClick); //add an event listener to when a cell gets clicked
             row.appendChild(cell);
         }
 
@@ -38,7 +45,13 @@ function displayGameBoard(){
     }
 }
 
+function handleClick(event){
+    const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
+}
+
 displayGameBoard();
+
+
 
 
 const playerFactory = function(playerType) {
