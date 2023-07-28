@@ -14,7 +14,7 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
         return boardMatrix;
     }
 
-    function setCellValue(row, col, value){
+    function setCellValue(row, col, value){ //to make changes in the gameBoard and mark the board according to player symbol
         return boardMatrix[row][col] = value;
     }
 
@@ -47,6 +47,16 @@ function displayGameBoard(){
 
 function handleClick(event){
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
+    const row = clickedCell.getAttribute('row'); //get the value of the attribute 'row' from the table cell <td>
+    const column = clickedCell.getAttribute('column');
+
+    const rowIndex = parseInt(row); //since the row var is stored as a string
+    const colIndex = parseInt(column);
+
+    const currentPlayer = getCurrentPlayer();
+    const playerSymbol = currentPlayer.getPlayerSymbol();
+    clickedCell.textContent = playerSymbol; //could be X or O
+    gameBoard.setCellValue(rowIndex, colIndex, playerSymbol);
 }
 
 displayGameBoard();
