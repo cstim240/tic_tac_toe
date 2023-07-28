@@ -9,6 +9,7 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     ];
 
     let isGameOver = false;
+    let playerSymbol;
 
     function getBoardMatrix(){
         return boardMatrix;
@@ -19,9 +20,13 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     }
 
     return {getBoardMatrix,
-        isGameOver, setCellValue
+        isGameOver, playerSymbol ,setCellValue
     };
 })();
+
+function choosePlayerSymbol(){
+    
+}
 
 function displayGameBoard(){
     const gameBoardElement = document.getElementById("game_board");
@@ -59,18 +64,18 @@ function handleClick(event){
     gameBoard.setCellValue(rowIndex, colIndex, playerSymbol);
 }
 
+function getCurrentPlayer(){
+
+}
 displayGameBoard();
-
-
-
 
 const playerFactory = function(playerType) {
     let playerSymbol;
     
     function assignSymbol() {
-        if (playerType == 'user'){
+        if (playerType == 'player1'){
             playerSymbol = 'X';
-        } else {
+        } else { 
             playerSymbol = 'O';
         } 
     }
