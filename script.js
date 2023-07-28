@@ -24,10 +24,6 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     };
 })();
 
-function choosePlayerSymbol(){
-    
-}
-
 function displayGameBoard(){
     const gameBoardElement = document.getElementById("game_board");
     const boardMatrix = gameBoard.getBoardMatrix(); //gets the boardMatrix from the gameBoard object
@@ -50,6 +46,36 @@ function displayGameBoard(){
     }
 }
 
+/*assignSymbol is short-hand (ES6), for the more verbose way
+    it would be variable : function, in this case assignSymbol : assignSymbol
+    */
+
+    /*
+    The object literal, when returned by the playerFactory function, 
+    creates a player object with the specified properties and methods. 
+    The shorthand notations help keep the code concise and more readable.
+    */
+   
+const playerFactory = function(playerSymbol) {
+
+    function getSymbol(){
+        return playerSymbol;
+    }
+
+    return getSymbol
+};
+
+function choosePlayerSymbol(){
+    const chosenSymbol = prompt("X goes first, would you like X or O?");
+    const player1 = playerFactory(chosenSymbol);
+
+    if (chosenSymbol == 'X'){
+        const player2 = playerFactory("O");
+    } else {
+        const player2 = playerFactory("X");
+    }
+}
+
 function handleClick(event){
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
     const row = clickedCell.getAttribute('row'); //get the value of the attribute 'row' from the table cell <td>
@@ -69,38 +95,7 @@ function getCurrentPlayer(){
 }
 displayGameBoard();
 
-const playerFactory = function(playerType) {
-    let playerSymbol;
+
     
-    function assignSymbol() {
-        if (playerType == 'player1'){
-            playerSymbol = 'X';
-        } else { 
-            playerSymbol = 'O';
-        } 
-    }
 
-    assignSymbol();
-    return {assignSymbol, //when the property name and the variable or function name are the same, you can use the shorthand notation
-        getPlayerSymbol(){
-            return playerSymbol; //either X or O
-        },
-        getPlayerType(){
-            return playerType; //could be user, or bot, or anything else
-        }
-        }
-};
-    /*assignSymbol is short-hand (ES6), for the more verbose way
-    it would be variable : function, in this case assignSymbol : assignSymbol
-    */
-
-    /*
-    The object literal, when returned by the playerFactory function, 
-    creates a player object with the specified properties and methods. 
-    The shorthand notations help keep the code concise and more readable.
-    */
-
-
-const user = playerFactory('user');
-console.log(user.getPlayerSymbol());
 
