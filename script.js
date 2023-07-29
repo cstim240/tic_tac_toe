@@ -10,6 +10,7 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
 
     let isGameOver = false;
     let isXsTurn = true; //since x goes first
+    let player1, player2;
 
     function getBoardMatrix(){
         return boardMatrix;
@@ -20,9 +21,20 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     }
 
     return {getBoardMatrix,
-        isGameOver,setCellValue, isXsTurn
+        isGameOver,setCellValue, isXsTurn, player1, player2
     };
 })();
+
+function choosePlayerSymbol(){
+    const chosenSymbol = prompt("X goes first, would you like X or O?");
+    player1 = playerFactory(chosenSymbol);
+
+    player2 = (chosenSymbol === "X")? playerFactory("O") : playerFactory("X");
+}
+
+const playerFactory = function(playerSymbol) {
+    return playerSymbol;
+};
 
 function displayGameBoard(){ //displays the gameBoard, also add eventlisteners for clicks on each table cell
     const gameBoardElement = document.getElementById("game_board");
@@ -56,27 +68,6 @@ function displayGameBoard(){ //displays the gameBoard, also add eventlisteners f
     The shorthand notations help keep the code concise and more readable.
     */
 
-const playerFactory = function(playerSymbol) {
-
-    function getSymbol(){
-        return playerSymbol;
-    }
-
-    return getSymbol
-};
-
-function choosePlayerSymbol(){
-    const chosenSymbol = prompt("X goes first, would you like X or O?");
-    const player1 = playerFactory(chosenSymbol);
-
-    if (chosenSymbol == 'X'){
-        const player2 = playerFactory("O");
-
-    } else {
-        const player2 = playerFactory("X");
-    }
-}
-
 function handleClick(event){
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
     const row = clickedCell.getAttribute('row'); //get the value of the attribute 'row' from the table cell <td>
@@ -86,15 +77,20 @@ function handleClick(event){
     const colIndex = parseInt(column);
 
     const currentPlayer = getCurrentPlayer();
-    const playerSymbol = currentPlayer.getPlayerSymbol();
-    clickedCell.textContent = playerSymbol; //could be X or O
-    gameBoard.setCellValue(rowIndex, colIndex, playerSymbol);
+    clickedCell.textContent = currentPlayer; //could be X or O
+    gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
+    gameBoard.isXsTurn = !gameBoard.isXsTurn;
+
 }
 
 function getCurrentPlayer(){
-
-}
-
+    const xPlayer = (player1 == "X") ? player1 : player2;
+    const oPlayer = (player2 == "O") ? player2 : player1;
+    if (gameBoard.isXsTurn){
+        return xPlayer;
+    } else 
+        return oPlayer;
+} 
 
 displayGameBoard(); 
 
