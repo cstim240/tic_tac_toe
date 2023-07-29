@@ -26,9 +26,11 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
 })();
 
 function choosePlayerSymbol(){
-    const chosenSymbol = prompt("X goes first, would you like X or O?");
+    let chosenSymbol;
+    do {
+        chosenSymbol = prompt("X goes first, would you like X or O?").toUpperCase(); 
+    } while (chosenSymbol != "X" || chosenSymbol != "O");
     player1 = playerFactory(chosenSymbol);
-
     player2 = (chosenSymbol === "X")? playerFactory("O") : playerFactory("X");
 }
 
@@ -68,7 +70,7 @@ function displayGameBoard(){ //displays the gameBoard, also add eventlisteners f
     The shorthand notations help keep the code concise and more readable.
     */
 
-function handleClick(event){
+function handleClick(event){ //adds an eventListener to each generated table cell, marks clicked cells and flips whose turn it is
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
     const row = clickedCell.getAttribute('row'); //get the value of the attribute 'row' from the table cell <td>
     const column = clickedCell.getAttribute('column');
