@@ -75,21 +75,22 @@ function displayGameBoard(){ //displays the gameBoard, also add eventlisteners f
 
 function handleClick(event){ //adds an eventListener to each generated table cell, marks clicked cells and flips whose turn it is
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
-    const row = clickedCell.getAttribute('row'); //get the value of the attribute 'row' from the table cell <td>
-    const column = clickedCell.getAttribute('column');
+    if (clickedCell.textContent == ''){ //checks if the cell's content is empty, otherwise prevents player from replacing value inside cell
+        const row = clickedCell.getAttribute('row'); //get the value of the attribute 'row' from the table cell <td>
+        const column = clickedCell.getAttribute('column');
+        const rowIndex = parseInt(row); //since the row var is stored as a string
+        const colIndex = parseInt(column);
 
-    const rowIndex = parseInt(row); //since the row var is stored as a string
-    const colIndex = parseInt(column);
-
-    const currentPlayer = getCurrentPlayer();
-    clickedCell.textContent = currentPlayer; //could be X or O
-    gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
-    gameBoard.isXsTurn = !gameBoard.isXsTurn;
+        const currentPlayer = getCurrentPlayer();
+        clickedCell.textContent = currentPlayer; //could be X or O
+        gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
+        gameBoard.isXsTurn = !gameBoard.isXsTurn;
+    }
     checkForEnd();
 }
 
 function checkForEnd(){
-    
+
 }
 
 displayGameBoard(); 
