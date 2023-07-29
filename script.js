@@ -55,20 +55,23 @@ function displayGameBoard(){ //displays the gameBoard, also add eventlisteners f
             cell.addEventListener('click', handleClick); //add an event listener to when a cell gets clicked
             row.appendChild(cell);
         }
-
         gameBoardElement.appendChild(row);
     }
 }
 
-/*assignSymbol is short-hand (ES6), for the more verbose way
-    it would be variable : function, in this case assignSymbol : assignSymbol
-    */
-
-    /*
-    The object literal, when returned by the playerFactory function, 
-    creates a player object with the specified properties and methods. 
+/*assignSymbol is short-hand (ES6), for the more verbose way it would be variable : function, in this case assignSymbol : assignSymbol
+    The object literal, when returned by the playerFactory function, creates a player object with the specified properties and methods. 
     The shorthand notations help keep the code concise and more readable.
     */
+
+    function getCurrentPlayer(){
+        const xPlayer = (player1 == "X") ? player1 : player2;
+        const oPlayer = (player2 == "O") ? player2 : player1;
+        if (gameBoard.isXsTurn){
+            return xPlayer;
+        } else 
+            return oPlayer;
+    } 
 
 function handleClick(event){ //adds an eventListener to each generated table cell, marks clicked cells and flips whose turn it is
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
@@ -82,17 +85,12 @@ function handleClick(event){ //adds an eventListener to each generated table cel
     clickedCell.textContent = currentPlayer; //could be X or O
     gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
     gameBoard.isXsTurn = !gameBoard.isXsTurn;
-
+    checkForEnd();
 }
 
-function getCurrentPlayer(){
-    const xPlayer = (player1 == "X") ? player1 : player2;
-    const oPlayer = (player2 == "O") ? player2 : player1;
-    if (gameBoard.isXsTurn){
-        return xPlayer;
-    } else 
-        return oPlayer;
-} 
+function checkForEnd(){
+    
+}
 
 displayGameBoard(); 
 
