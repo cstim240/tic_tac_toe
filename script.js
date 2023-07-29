@@ -9,7 +9,7 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     ];
 
     let isGameOver = false;
-    let playerSymbol;
+    let isXsTurn = true; //since x goes first
 
     function getBoardMatrix(){
         return boardMatrix;
@@ -20,11 +20,11 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     }
 
     return {getBoardMatrix,
-        isGameOver, playerSymbol ,setCellValue
+        isGameOver,setCellValue, isXsTurn
     };
 })();
 
-function displayGameBoard(){
+function displayGameBoard(){ //displays the gameBoard, also add eventlisteners for clicks on each table cell
     const gameBoardElement = document.getElementById("game_board");
     const boardMatrix = gameBoard.getBoardMatrix(); //gets the boardMatrix from the gameBoard object
 
@@ -55,7 +55,7 @@ function displayGameBoard(){
     creates a player object with the specified properties and methods. 
     The shorthand notations help keep the code concise and more readable.
     */
-   
+
 const playerFactory = function(playerSymbol) {
 
     function getSymbol(){
@@ -71,6 +71,7 @@ function choosePlayerSymbol(){
 
     if (chosenSymbol == 'X'){
         const player2 = playerFactory("O");
+
     } else {
         const player2 = playerFactory("X");
     }
@@ -93,7 +94,9 @@ function handleClick(event){
 function getCurrentPlayer(){
 
 }
-displayGameBoard();
+
+
+displayGameBoard(); 
 
 
     
