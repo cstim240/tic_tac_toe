@@ -29,7 +29,7 @@ function choosePlayerSymbol(){
     let chosenSymbol;
     do {
         chosenSymbol = prompt("X goes first, would you like X or O?").toUpperCase(); 
-    } while (chosenSymbol != "X" || chosenSymbol != "O");
+    } while (chosenSymbol !== "X" && chosenSymbol !== "O");
     player1 = playerFactory(chosenSymbol);
     player2 = (chosenSymbol === "X")? playerFactory("O") : playerFactory("X");
 }
