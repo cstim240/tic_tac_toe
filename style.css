@@ -49,14 +49,24 @@ table {
 }
 /*End of Meyer's Reset - CSS begins below! */
 
+html, body {
+	height:100vh;
+	width: 100%;
+}
+
 .board_container {
-    border: 1px solid black;
+	height: 100%;
+	display: flex;
+	flex: 1 1 auto;
+	justify-content: center;
+	align-items: center;
 }
 
 #game_board td{
-    width: 50px;
-    height: 50px;
+    width: 200px;
+    height: 200px;
     text-align: center;
+	vertical-align: middle; /*feature of tables*/
     font-size: 24px;
     font-weight: bold;
     border: 2px solid red;
