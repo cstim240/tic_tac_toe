@@ -104,6 +104,16 @@ function checkForEnd(){
             alert(`${boardMatrix[0][i]} wins the game!`);
         }
     }
+
+    //checks for a diagonal win (top left to bot right)
+    if ((boardMatrix[0][0] !== '') && (boardMatrix[0][0] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][2])){
+        alert(`${boardMatrix[0][0]} wins the game!`);
+    }
+
+    //checks for a diagonal win (top right to bot left)
+    if ((boardMatrix[0][2] !== '') && (boardMatrix[0][2] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][0])){
+        alert(`${boardMatrix[0][2]} wins the game!`)
+    }
 }
 
 displayGameBoard(); 
