@@ -95,13 +95,14 @@ function handleClick(event){ //adds an eventListener to each generated table cel
 function checkForEnd(){
     const boardMatrix = gameBoard.getBoardMatrix();
 
-    //check for wins via rows, i represents possible columns, on the right side of the OR logical op checks for a win via columns
+    //check for wins via rows(1st if-statement) or columns (2nd if statement)
     for (let i = 0; i < 3; i++){
-        if (((boardMatrix[i][0] !== '') && (boardMatrix[i][0] === boardMatrix[i][1]) && (boardMatrix[i][1] === boardMatrix[i][2])) || 
-        ((boardMatrix[0][i] !== '') && (boardMatrix[0][i] === boardMatrix[1][i]) && (boardMatrix[1][i] === boardMatrix[2][i]))){
-            alert(`${boardMatrix[i][0]} wins the game!`)
+        if ((boardMatrix[i][0] !== '') && (boardMatrix[i][0] === boardMatrix[i][1]) && (boardMatrix[i][1] === boardMatrix[i][2]))  {
+            alert(`${boardMatrix[i][0]} wins the game!`);
         }
-
+        if ((boardMatrix[0][i] !== '') && (boardMatrix[0][i] === boardMatrix[1][i]) && (boardMatrix[1][i] === boardMatrix[2][i])) {
+            alert(`${boardMatrix[0][i]} wins the game!`);
+        }
     }
 }
 
