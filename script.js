@@ -32,6 +32,7 @@ function choosePlayerSymbol(){
     } while (chosenSymbol !== "X" && chosenSymbol !== "O");
     player1 = playerFactory(chosenSymbol);
     player2 = (chosenSymbol === "X")? playerFactory("O") : playerFactory("X");
+    alert(`Player 2 will be ${player2}`);
 }
 
 const playerFactory = function(playerSymbol) {
