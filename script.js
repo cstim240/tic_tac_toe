@@ -86,11 +86,20 @@ function handleClick(event){ //adds an eventListener to each generated table cel
         gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
         gameBoard.isXsTurn = !gameBoard.isXsTurn;
     }
-    checkForEnd();
+    setTimeout(function(){
+        checkForEnd(); }, 500
+        );
 }
 
 function checkForEnd(){
+    const boardMatrix = gameBoard.getBoardMatrix();
 
+    //check for wins via rows, i represents possible columns
+    for (let i = 0; i < 3; i++){
+        if ((boardMatrix[i][0] !== '') && (boardMatrix[i][0] === boardMatrix[i][1]) && (boardMatrix[i][1] === boardMatrix[i][2])){
+            alert(`${boardMatrix[i][0]} wins the game!`)
+        }
+    }
 }
 
 displayGameBoard(); 
