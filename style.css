@@ -100,4 +100,17 @@ html, body {
 	gap: 20px;
 }
 
+.footer {
+	height: 2vh;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	background-color: antiquewhite;
+	padding-top: 3px;
+}
+
+#github_logo {
+	height: 85%;
+}
+
 
