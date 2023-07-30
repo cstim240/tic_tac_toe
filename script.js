@@ -87,7 +87,7 @@ function handleClick(event){ //adds an eventListener to each generated table cel
         gameBoard.isXsTurn = !gameBoard.isXsTurn;
     }
     setTimeout(function(){
-        checkForEnd(); }, 500
+        checkForEnd(); }, 300
         );
 }
 
