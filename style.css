@@ -113,4 +113,9 @@ html, body {
 	height: 85%;
 }
 
+#copyright {
+	text-decoration: none;
+	color: blue;
+}
+
 
