@@ -35,7 +35,7 @@ function choosePlayerSymbol(){
     player1 = playerFactory(chosenSymbol, player1Name);
     player2Name = prompt("What is player 2's name?");
     player2 = (chosenSymbol === "X")? playerFactory("O", player2Name) : playerFactory("X", player2Name);
-    alert(`${player2.player2Name} will be ${player2.playerSymbol}`);
+    alert(`${player2.playerName} will be ${player2.playerSymbol}`);
 }
 
 const playerFactory = function(playerSymbol, playerName) {
