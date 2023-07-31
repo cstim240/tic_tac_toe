@@ -1,4 +1,5 @@
-const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of game 
+//IIFE - holds the 3x3 game board and status of game 
+const gameBoard = (function() { 
     'use strict';
 
     let boardMatrix = 
@@ -8,7 +9,6 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     ['', '', '']
     ];
 
-    let isGameOver = false;
     let isXsTurn = true; //since x goes first
     let player1, player2;
 
@@ -21,7 +21,7 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
     }
 
     return {getBoardMatrix,
-        isGameOver,setCellValue, isXsTurn, player1, player2
+        setCellValue, isXsTurn, player1, player2
     };
 })();
 
@@ -39,7 +39,11 @@ function choosePlayerSymbol(){
 }
 
 const playerFactory = function(playerSymbol, playerName) {
-    return {playerSymbol, playerName}
+    function resetVals(){
+        this.playerSymbol = '';
+        this.playerName = '';
+    }
+    return {playerSymbol, playerName, resetVals}
 };
 
 function displayGameBoard(){ //displays the gameBoard, also add eventlisteners for clicks on each table cell
@@ -68,14 +72,14 @@ function displayGameBoard(){ //displays the gameBoard, also add eventlisteners f
     The shorthand notations help keep the code concise and more readable.
     */
 
-    function getCurrentPlayer(){
-        const xPlayer = (player1 == "X") ? player1 : player2;
-        const oPlayer = (player2 == "O") ? player2 : player1;
-        if (gameBoard.isXsTurn){
-            return xPlayer;
-        } else 
-            return oPlayer;
-    } 
+function getCurrentPlayer(){
+    const xPlayer = (player1 == "X") ? player1 : player2;
+    const oPlayer = (player2 == "O") ? player2 : player1;
+    if (gameBoard.isXsTurn){
+        return xPlayer;
+    } else 
+        return oPlayer;
+} 
 
 function handleClick(event){ //adds an eventListener to each generated table cell, marks clicked cells and flips whose turn it is
     const clickedCell = event.target; //event.target represents the HTML element that triggerred the event. 
@@ -87,7 +91,7 @@ function handleClick(event){ //adds an eventListener to each generated table cel
 
         const currentPlayer = getCurrentPlayer();
         clickedCell.textContent = currentPlayer.playerSymbol; //could be X or O
-        gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
+        gameBoard.setCellValue(rowIndex, colIndex, currentPlayer.playerSymbol);
         gameBoard.isXsTurn = !gameBoard.isXsTurn;
     }
     setTimeout(function(){
@@ -117,10 +121,43 @@ function checkForEnd(){
     if ((boardMatrix[0][2] !== '') && (boardMatrix[0][2] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][0])){
         alert(`${boardMatrix[0][2].playerName} wins the game!`)
     }
+
+    let isDraw = true;
+    for (let i = 0; i < 3; i++){
+        for (let j = 0; j < 3; j++){
+            if (boardMatrix[i][j] === ''){
+                isDraw = false;
+                break;
+            }
+        }
+    }
+
+    if (isDraw){
+        alert("It's a draw!");
+    }
 }
 
 displayGameBoard(); 
 
+function reset(){
+    const boardMatrix = gameBoard.getBoardMatrix();
+    for (let i = 0; i < 3; i++){
+        for (let j = 0; j < 3; j++){
+            gameBoard.setCellValue(i, j, '');
+        }
+    }
+
+
+    isXsTurn = true; 
+
+    player1.resetVals();
+    player2.resetVals();
+
+    choosePlayerSymbol();
+    
+    
+    displayGameBoard();
+}
 
     
 
