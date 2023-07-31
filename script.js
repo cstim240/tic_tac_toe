@@ -9,8 +9,8 @@ const gameBoard = (function() {
     ['', '', '']
     ];
 
-    let isXsTurn = true; //since x goes first
     let player1, player2;
+    let currentPlayer;
 
     function getBoardMatrix(){
         return boardMatrix;
@@ -21,7 +21,7 @@ const gameBoard = (function() {
     }
 
     return {getBoardMatrix,
-        setCellValue, isXsTurn, player1, player2
+        setCellValue, currentPlayer, player1, player2
     };
 })();
 
@@ -39,6 +39,7 @@ function choosePlayerSymbol(){
     
     const xName = (player1.playerSymbol === "X") ? player1.playerName : player2.playerName;
     updateTurnDisplay(xName);
+    currentPlayer = (player1.playerSymbol === "X") ? player1 : player2;
 }
 
 function updateTurnDisplay(name){
@@ -80,15 +81,10 @@ function displayGameBoard(){ //displays the gameBoard, also add eventlisteners f
     The shorthand notations help keep the code concise and more readable.
     */
 
-function getCurrentPlayer(){
+function switchCurrentPlayer(){
     const xPlayer = (player1 == "X") ? player1 : player2;
     const oPlayer = (player2 == "O") ? player2 : player1;
-    if (gameBoard.isXsTurn){
-        updateTurnDisplay(xPlayer.playerName);
-        return xPlayer;
-    } else 
-        updateTurnDisplay(oPlayer.playerName);
-        return oPlayer;
+    return currentPlayer === xPlayer ? oPlayer : xPlayer;
 } 
 
 function handleClick(event){ //adds an eventListener to each generated table cell, marks clicked cells and flips whose turn it is
@@ -99,40 +95,45 @@ function handleClick(event){ //adds an eventListener to each generated table cel
         const rowIndex = parseInt(row); //since the row var is stored as a string
         const colIndex = parseInt(column);
 
-        const currentPlayer = getCurrentPlayer();
+        
         clickedCell.textContent = currentPlayer.playerSymbol; //could be X or O
         gameBoard.setCellValue(rowIndex, colIndex, currentPlayer.playerSymbol);
-        gameBoard.isXsTurn = !gameBoard.isXsTurn;
+
     }
-    setTimeout(function(){
-        checkForEnd(); }, 300
-        );
+
+    setTimeout(() => {
+        checkForEnd(); 
+        }, 300);
 }
 
 function checkForEnd(){
-    const boardMatrix = gameBoard.getBoardMatrix();
+    let boardMatrix = gameBoard.getBoardMatrix();
+    if (!currentPlayer){
+        return;
+    }
+    const winner = currentPlayer.playerName;
 
     //check for wins via rows(1st if-statement) or columns (2nd if statement)
     for (let i = 0; i < 3; i++){
         if ((boardMatrix[i][0] !== '') && (boardMatrix[i][0] === boardMatrix[i][1]) && (boardMatrix[i][1] === boardMatrix[i][2]))  {
-            alert(`${boardMatrix[i][0].playerName} wins the game!`);
+            alert(`${winner} wins the game!`);
             reset();
         }
         if ((boardMatrix[0][i] !== '') && (boardMatrix[0][i] === boardMatrix[1][i]) && (boardMatrix[1][i] === boardMatrix[2][i])) {
-            alert(`${boardMatrix[0][i].playerName} wins the game!`);
+            alert(`${winner} wins the game!`);
             reset();
         }
     }
 
     //checks for a diagonal win (top left to bot right)
     if ((boardMatrix[0][0] !== '') && (boardMatrix[0][0] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][2])){
-        alert(`${boardMatrix[0][0].playerName} wins the game!`);
+        alert(`${winner} wins the game!`);
         reset();
     }
 
     //checks for a diagonal win (top right to bot left)
     if ((boardMatrix[0][2] !== '') && (boardMatrix[0][2] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][0])){
-        alert(`${boardMatrix[0][2].playerName} wins the game!`);
+        alert(`${winner} wins the game!`);
         reset();
     }
 
@@ -150,6 +151,10 @@ function checkForEnd(){
         alert("It's a draw!");
         reset();
     }
+
+    //if there is neither a win or draw, we switch the currentPlayer and continue
+    currentPlayer = switchCurrentPlayer();
+    updateTurnDisplay(currentPlayer.playerName);
 }
 
 displayGameBoard(); 
