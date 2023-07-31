@@ -39,12 +39,11 @@ function choosePlayerSymbol(){
     
     const xName = (player1.playerSymbol === "X") ? player1.playerName : player2.playerName;
     updateTurnDisplay(xName);
-    
 }
 
 function updateTurnDisplay(name){
     const pDisplay = document.getElementById("theirTurn");
-    pDisplay.textContent = `It's ${displayedName}'s turn!`; //display whoever's 
+    pDisplay.innerHTML = `It's ${name}'s turn!`; //display whoever's turn it is
 }
 
 const playerFactory = function(playerSymbol, playerName) {
@@ -85,9 +84,10 @@ function getCurrentPlayer(){
     const xPlayer = (player1 == "X") ? player1 : player2;
     const oPlayer = (player2 == "O") ? player2 : player1;
     if (gameBoard.isXsTurn){
+        updateTurnDisplay(xPlayer.playerName);
         return xPlayer;
     } else 
-
+        updateTurnDisplay(oPlayer.playerName);
         return oPlayer;
 } 
 
@@ -116,20 +116,24 @@ function checkForEnd(){
     for (let i = 0; i < 3; i++){
         if ((boardMatrix[i][0] !== '') && (boardMatrix[i][0] === boardMatrix[i][1]) && (boardMatrix[i][1] === boardMatrix[i][2]))  {
             alert(`${boardMatrix[i][0].playerName} wins the game!`);
+            reset();
         }
         if ((boardMatrix[0][i] !== '') && (boardMatrix[0][i] === boardMatrix[1][i]) && (boardMatrix[1][i] === boardMatrix[2][i])) {
             alert(`${boardMatrix[0][i].playerName} wins the game!`);
+            reset();
         }
     }
 
     //checks for a diagonal win (top left to bot right)
     if ((boardMatrix[0][0] !== '') && (boardMatrix[0][0] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][2])){
         alert(`${boardMatrix[0][0].playerName} wins the game!`);
+        reset();
     }
 
     //checks for a diagonal win (top right to bot left)
     if ((boardMatrix[0][2] !== '') && (boardMatrix[0][2] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][0])){
-        alert(`${boardMatrix[0][2].playerName} wins the game!`)
+        alert(`${boardMatrix[0][2].playerName} wins the game!`);
+        reset();
     }
 
     let isDraw = true;
@@ -144,6 +148,7 @@ function checkForEnd(){
 
     if (isDraw){
         alert("It's a draw!");
+        reset();
     }
 }
 
