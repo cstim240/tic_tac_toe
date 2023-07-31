@@ -33,6 +33,8 @@ function choosePlayerSymbol(){
         chosenSymbol = prompt(`X goes first. Does ${player1Name} want X or O?`).toUpperCase(); 
     } while (chosenSymbol !== "X" && chosenSymbol !== "O");
     player1 = playerFactory(chosenSymbol, player1Name);
+    alert(`${player1.playerName} will be ${player1.playerSymbol}`)
+
     player2Name = prompt("What is player 2's name?");
     player2 = (chosenSymbol === "X")? playerFactory("O", player2Name) : playerFactory("X", player2Name);
     alert(`${player2.playerName} will be ${player2.playerSymbol}`);
@@ -99,11 +101,13 @@ function handleClick(event){ //adds an eventListener to each generated table cel
         clickedCell.textContent = currentPlayer.playerSymbol; //could be X or O
         gameBoard.setCellValue(rowIndex, colIndex, currentPlayer.playerSymbol);
 
+        setTimeout(() => {
+            checkForEnd(); 
+            }, 300);
+
     }
 
-    setTimeout(() => {
-        checkForEnd(); 
-        }, 300);
+
 }
 
 function checkForEnd(){
