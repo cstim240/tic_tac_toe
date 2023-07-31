@@ -26,7 +26,7 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
 })();
 
 function choosePlayerSymbol(){
-    let chosenSymbol, opponentSymbol;
+    let chosenSymbol;
     let player1Name, player2Name;
     do {
         player1Name = prompt("What is player 1's name?");
@@ -34,13 +34,12 @@ function choosePlayerSymbol(){
     } while (chosenSymbol !== "X" && chosenSymbol !== "O");
     player1 = playerFactory(chosenSymbol, player1Name);
     player2Name = prompt("What is player 2's name?");
-    opponentSymbol = (chosenSymbol === "X")? "O" : "X";
-    player2 =  playerFactory(opponentSymbol, player2Name);
-    alert(`${player2Name} will be ${opponentSymbol}`);
+    player2 = (chosenSymbol === "X")? playerFactory("O", player2Name) : playerFactory("X", player2Name);
+    alert(`${player2.player2Name} will be ${player2.playerSymbol}`);
 }
 
 const playerFactory = function(playerSymbol, playerName) {
-    return playerSymbol, playerName;
+    return {playerSymbol, playerName}
 };
 
 function displayGameBoard(){ //displays the gameBoard, also add eventlisteners for clicks on each table cell
@@ -87,7 +86,7 @@ function handleClick(event){ //adds an eventListener to each generated table cel
         const colIndex = parseInt(column);
 
         const currentPlayer = getCurrentPlayer();
-        clickedCell.textContent = currentPlayer; //could be X or O
+        clickedCell.textContent = currentPlayer.playerSymbol; //could be X or O
         gameBoard.setCellValue(rowIndex, colIndex, currentPlayer);
         gameBoard.isXsTurn = !gameBoard.isXsTurn;
     }
