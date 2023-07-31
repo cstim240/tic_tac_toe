@@ -36,6 +36,15 @@ function choosePlayerSymbol(){
     player2Name = prompt("What is player 2's name?");
     player2 = (chosenSymbol === "X")? playerFactory("O", player2Name) : playerFactory("X", player2Name);
     alert(`${player2.playerName} will be ${player2.playerSymbol}`);
+    
+    const xName = (player1.playerSymbol === "X") ? player1.playerName : player2.playerName;
+    updateTurnDisplay(xName);
+    
+}
+
+function updateTurnDisplay(name){
+    const pDisplay = document.getElementById("theirTurn");
+    pDisplay.textContent = `It's ${displayedName}'s turn!`; //display whoever's 
 }
 
 const playerFactory = function(playerSymbol, playerName) {
@@ -78,6 +87,7 @@ function getCurrentPlayer(){
     if (gameBoard.isXsTurn){
         return xPlayer;
     } else 
+
         return oPlayer;
 } 
 
@@ -146,15 +156,12 @@ function reset(){
             gameBoard.setCellValue(i, j, '');
         }
     }
-
-
     isXsTurn = true; 
 
     player1.resetVals();
     player2.resetVals();
 
-    choosePlayerSymbol();
-    
+    choosePlayerSymbol();   
     
     displayGameBoard();
 }
