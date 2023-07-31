@@ -26,17 +26,21 @@ const gameBoard = (function() { //IIFE - holds the 3x3 game board and status of 
 })();
 
 function choosePlayerSymbol(){
-    let chosenSymbol;
+    let chosenSymbol, opponentSymbol;
+    let player1Name, player2Name;
     do {
-        chosenSymbol = prompt("X goes first, would you like X or O?").toUpperCase(); 
+        player1Name = prompt("What is player 1's name?");
+        chosenSymbol = prompt(`X goes first. Does ${player1Name} want X or O?`).toUpperCase(); 
     } while (chosenSymbol !== "X" && chosenSymbol !== "O");
-    player1 = playerFactory(chosenSymbol);
-    player2 = (chosenSymbol === "X")? playerFactory("O") : playerFactory("X");
-    alert(`Player 2 will be ${player2}`);
+    player1 = playerFactory(chosenSymbol, player1Name);
+    player2Name = prompt("What is player 2's name?");
+    opponentSymbol = (chosenSymbol === "X")? "O" : "X";
+    player2 =  playerFactory(opponentSymbol, player2Name);
+    alert(`${player2Name} will be ${opponentSymbol}`);
 }
 
-const playerFactory = function(playerSymbol) {
-    return playerSymbol;
+const playerFactory = function(playerSymbol, playerName) {
+    return playerSymbol, playerName;
 };
 
 function displayGameBoard(){ //displays the gameBoard, also add eventlisteners for clicks on each table cell
@@ -98,21 +102,21 @@ function checkForEnd(){
     //check for wins via rows(1st if-statement) or columns (2nd if statement)
     for (let i = 0; i < 3; i++){
         if ((boardMatrix[i][0] !== '') && (boardMatrix[i][0] === boardMatrix[i][1]) && (boardMatrix[i][1] === boardMatrix[i][2]))  {
-            alert(`${boardMatrix[i][0]} wins the game!`);
+            alert(`${boardMatrix[i][0].playerName} wins the game!`);
         }
         if ((boardMatrix[0][i] !== '') && (boardMatrix[0][i] === boardMatrix[1][i]) && (boardMatrix[1][i] === boardMatrix[2][i])) {
-            alert(`${boardMatrix[0][i]} wins the game!`);
+            alert(`${boardMatrix[0][i].playerName} wins the game!`);
         }
     }
 
     //checks for a diagonal win (top left to bot right)
     if ((boardMatrix[0][0] !== '') && (boardMatrix[0][0] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][2])){
-        alert(`${boardMatrix[0][0]} wins the game!`);
+        alert(`${boardMatrix[0][0].playerName} wins the game!`);
     }
 
     //checks for a diagonal win (top right to bot left)
     if ((boardMatrix[0][2] !== '') && (boardMatrix[0][2] === boardMatrix[1][1]) && (boardMatrix[1][1] === boardMatrix[2][0])){
-        alert(`${boardMatrix[0][2]} wins the game!`)
+        alert(`${boardMatrix[0][2].playerName} wins the game!`)
     }
 }
 
