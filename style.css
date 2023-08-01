@@ -48,8 +48,8 @@ table {
 	border-spacing: 0;
 }
 /*End of Meyer's Reset - CSS begins below! */
-
 html, body {
+	font-family: 'Shadows Into Light', cursive;
 	height:100vh;
 	width: 100%;
 	display: flex;
@@ -66,14 +66,19 @@ html, body {
 	justify-content: center;
 	gap: 15px;
 	align-items: center;
-	font-size: 30px;
-	font-weight: bold;
-	color: #4D5061;
 }
 
-.header .theirTurn {
-	font-size: 15px;
-	color: #30323D;
+#title {
+	font-size: 50px;
+	font-weight: bold;
+	color: #E09515;
+}
+
+#theirTurn {
+	font-size: 20px;
+	font-weight: bold;
+	color: #EFB857;
+	text-decoration-line: underline;
 }
 
 .board_container {
@@ -90,14 +95,15 @@ html, body {
     height: 100px;
     text-align: center;
 	vertical-align: middle; /*feature of tables*/
-    font-size: 24px;
+    font-size: 45px;
     font-weight: bold;
-    border: 1px solid black;
-    background-color: antiquewhite;
+	color: #EFB857;
+    border: 1px dotted #EFB857;
+    background-color: #D8ECFD;
 }
 
 #game_board td:hover{
-	background-color: lightgray;
+	background-color: #5C80BC;
 }
 
 .buttons {
@@ -106,6 +112,31 @@ html, body {
 	display: flex;
 	justify-content: center;
 	gap: 20px;
+}
+
+button {
+	padding: 20px;
+	background-color: #C5E2FC;
+	color: #FAFAFA;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 10px;
+	border: 0px;
+	box-shadow: 0px 2px 10px #E3F2FD;
+}
+
+button:hover {
+	background-color: #5C80BC;
+}
+
+#activateBot {
+	background-color: #D0CDC8;
+	color: #F6F5F4;
+}
+
+#activateBot:hover {
+	background-color: #D0CDC8;
+	color: #F6F5F4
 }
 
 .footer {
@@ -121,10 +152,21 @@ html, body {
 	height: 85%;
 }
 
+#github_logo:hover {
+	background-color: #EFB857;
+	border-radius: 5px;
+}
+
 #copyright {
 	text-decoration: none;
 	font-weight: 600;
 	color: #4D5061;
+}
+
+#copyright:hover {
+	background-color: #EFB857;
+	border-radius: 5px;
+	padding: 4px;
 }
 
 
