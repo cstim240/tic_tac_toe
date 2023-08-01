@@ -28,10 +28,6 @@ const gameBoard = (function() {
 function choosePlayerSymbol(){
     let chosenSymbol;
     let player1Name, player2Name;
-    const popupDiv = document.querySelector(".popup");
-    const popupContainer = document.createElement('div');
-    popupContainer.classList.add("popup_Container");
-    popupDiv.appendChild(popupContainer);
 
     do {
         player1Name = prompt("What is player 1's name?");
@@ -111,8 +107,6 @@ function handleClick(event){ //adds an eventListener to each generated table cel
             }, 300);
 
     }
-
-
 }
 
 function checkForEnd(){

@@ -69,21 +69,6 @@ html, body {
 	font-weight: bold;
 }
 
-.popup {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-}
-
-.popup_Container{
-	height: 100%;
-	width: 100%;
-	background-color: aqua;
-}
-
 .board_container {
 	height: 65vh;
 	width: 100%;
