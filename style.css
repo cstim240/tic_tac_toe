@@ -55,6 +55,7 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+	background-color: #E3F2FD;
 }
 
 .header {
@@ -63,14 +64,16 @@ html, body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 10px;
+	gap: 15px;
 	align-items: center;
 	font-size: 30px;
 	font-weight: bold;
+	color: #4D5061;
 }
 
 .header .theirTurn {
-	font-size: 20px;
+	font-size: 15px;
+	color: #30323D;
 }
 
 .board_container {
@@ -110,7 +113,7 @@ html, body {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
-	background-color: antiquewhite;
+	background-color: #E3F2FD;
 	padding-top: 3px;
 }
 
@@ -120,7 +123,8 @@ html, body {
 
 #copyright {
 	text-decoration: none;
-	color: blue;
+	font-weight: 600;
+	color: #4D5061;
 }
 
 
